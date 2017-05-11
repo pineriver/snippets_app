@@ -40,7 +40,7 @@ def main():
     
     arguments = parser.parse_args
     # Converts parsed arguments from Namespace to dictionary
-    arguments -= vars(arguments)
+    arguments = vars(arguments)
     command = arguments.pop("command")
     
     if command == "put":
