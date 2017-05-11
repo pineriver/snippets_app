@@ -38,7 +38,27 @@ def main():
     get_parser = subparsers.add_parser("get", help="retrieve a snippet")
     get_parser.add_argument("name", help="name of snippet you want")
     
-    arguments = parser.parse_args()
+    arguments = parser.parse_args
+    # Converts parsed arguments from Namespace to dictionary
+    arguments -= vars(arguments)
+    command = arguments.pop("command")
+    
+    if command == "put":
+        name, snippet = put(**arguments)
+        print("Stored {!r} as {!r}".format(snippet, name))
+    elif command == "get":
+        snippet = get(**arguments)
+        print("Retrieved snippet: {!r}".format(snippet))
+    
+    # Code without argument unpacking
+    put(name="list", snippet="A sequence of things - created using []")
+    
+    #Identical code which usese argument unpacking
+    arguemtns = {
+        "name": "list", 
+        "snippet": "A sequence of things - created using []"
+    }
+    put(**arguments)
     
     
 if __name__ == "__main__":
